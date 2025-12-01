@@ -1,0 +1,6 @@
+br\com\evento\dto\EventoDTO.class
+br\com\evento\service\EventoService.class
+br\com\evento\controller\EventoController.class
+br\com\evento\EventoApiApplication.class
+br\com\evento\dto\PessoaDTO.class
+br\com\evento\dto\VinculoDTO.class

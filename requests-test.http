@@ -1,0 +1,78 @@
+@baseUrl = http://localhost:8080/api/eventos
+
+### 1. Criar Evento: JavaDay (Mongo + Neo4j)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": "EVT01",
+  "nome": "Java Day 2024",
+  "data": "2024-11-20",
+  "local": "Auditório Central"
+}
+
+### 2. Criar Evento: Workshop Neo4j (Mongo + Neo4j)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": "EVT02",
+  "nome": "Workshop Graphs",
+  "data": "2024-12-05",
+  "local": "Lab 03"
+}
+
+### 3. Cadastrar Pessoa: Carlos (Participante)
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "email": "carlos@email.com",
+  "nome": "Carlos Silva"
+}
+
+### 4. Cadastrar Pessoa: Ana (Organizadora)
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "email": "ana@email.com",
+  "nome": "Ana Souza"
+}
+
+### 5. Vincular Carlos como PARTICIPANTE no JavaDay
+POST {{baseUrl}}/EVT01/participacao
+Content-Type: application/json
+
+{
+  "email": "carlos@email.com",
+  "tipo": "PARTICIPOU"
+}
+
+### 6. Vincular Ana como ORGANIZADORA no JavaDay
+POST {{baseUrl}}/EVT01/participacao
+Content-Type: application/json
+
+{
+  "email": "ana@email.com",
+  "tipo": "ORGANIZOU"
+}
+
+### 7. Requisito: Promover Carlos para Organizador (Mantém histórico de participação)
+PUT {{baseUrl}}/EVT01/promover?email=carlos@email.com
+
+### 8. Requisito: Consultar Rede do Evento (Neo4j)
+# Deve retornar Ana (Organizou) e Carlos (Participou e Organizou)
+GET {{baseUrl}}/EVT01/rede
+
+### 9. Requisito: Filtro Dinâmico MongoDB (Busca por Keyword)
+GET {{baseUrl}}/buscar?criterio=keyword&valor=Java
+
+### 10. Requisito: Filtro Dinâmico MongoDB (Busca por Local)
+GET {{baseUrl}}/buscar?criterio=local&valor=Lab 03
+
+### 11. Requisito: Exportar JSON (Integração)
+GET {{baseUrl}}/exportar/json
+
+### 12. Requisito: Exportar SQL (Legado/Relacional)
+GET {{baseUrl}}/exportar/sql
